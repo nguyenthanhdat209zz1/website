@@ -4,7 +4,7 @@ const container = document.querySelector(".container"),
     signUp = document.querySelector(".signup-link"),
     login = document.querySelector(".login-link");
 
-// hien thi mk
+// bật, tắt hiển thị mk
 pwShowHide.forEach(eyeIcon => {
     eyeIcon.addEventListener("click", () => {
         pwFields.forEach(pwField => {
@@ -25,7 +25,7 @@ pwShowHide.forEach(eyeIcon => {
     });
 });
 
-//hien thi dang ki dang nhap
+
 signUp.addEventListener("click", () => {
     container.classList.add("active");
 });
