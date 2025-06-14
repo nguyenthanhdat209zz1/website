@@ -13,7 +13,7 @@ import (
 
 var jwtKey = []byte("secret_key")
 
-// dangki
+// Đăng kí
 func Register(c *gin.Context) {
 	var input struct {
 		Name     string `json:"name" binding:"required"`
@@ -66,7 +66,7 @@ func Register(c *gin.Context) {
 	})
 }
 
-// dangnhap
+// Đăng nhạp
 func Login(c *gin.Context) {
 	var creds struct {
 		Email    string `json:"email" binding:"required,email"`
