@@ -13,6 +13,6 @@ func PostRouter(r *gin.Engine) {
 		PostGroup.GET("/", controllers.GetPosts)
 		PostGroup.GET("/:id", controllers.GetPostByID)
 		PostGroup.PUT("/:id", controllers.UpdatePost)
-		PostGroup.DELETE("/:id", controllers.DeletePost)
+		PostGroup.DELETE("/:id", controllers.RequireRole("admin"), controllers.DeletePost)
 	}
 }

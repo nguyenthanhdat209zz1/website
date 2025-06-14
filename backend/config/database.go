@@ -16,9 +16,12 @@ func Connect() {
 	database, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 
 	if err != nil {
-		log.Fatal("khong the ket noi voi db")
+		log.Fatal("Không thể kết nối với db")
 	}
-	fmt.Println("Da ket noi voi db")
+	fmt.Println("Đã kết nối với db")
 	database.AutoMigrate(&models.Post{})
 	DB = database
+
+	database.AutoMigrate(&models.User{})
+
 }

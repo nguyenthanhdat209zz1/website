@@ -30,7 +30,7 @@ func GetPostByID(c *gin.Context) {
 	id := c.Param("id")
 	var post models.Post
 	if err := config.DB.First(&post, id).Error; err != nil {
-		c.JSON(http.StatusNotFound, gin.H{"error": "Khog tim thay bai viet"})
+		c.JSON(http.StatusNotFound, gin.H{"error": "Không tìm thấy bài viết"})
 		return
 	}
 	c.JSON(http.StatusOK, post)
@@ -41,7 +41,7 @@ func UpdatePost(c *gin.Context) {
 	id := c.Param("id")
 	var post models.Post
 	if err := config.DB.First(&post, id).Error; err != nil {
-		c.JSON(http.StatusNotFound, gin.H{"error": "Khog tim thay bai viet"})
+		c.JSON(http.StatusNotFound, gin.H{"error": "Không tìm thấy bài viết"})
 		return
 	}
 	var updatedPost models.Post
@@ -72,5 +72,5 @@ func DeletePost(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{"message": "Đã xóa bài viết thành công"})
+	c.JSON(http.StatusOK, gin.H{"message": "xóa bài viết thành công"})
 }
