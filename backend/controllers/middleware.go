@@ -23,7 +23,6 @@ func CorsMiddleware() gin.HandlerFunc {
 	}
 }
 
-// Hàm tiện ích
 func getTokenFromHeader(c *gin.Context) (string, error) {
 	authHeader := c.GetHeader("Authorization")
 	if authHeader == "" {
@@ -47,7 +46,7 @@ func parseToken(tokenStr string) (*jwt.Token, error) {
 	})
 }
 
-// Middleware kiểm tra quyền
+// kiểm tra quyền
 func RequireRole(role string) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		tokenStr, err := getTokenFromHeader(c)

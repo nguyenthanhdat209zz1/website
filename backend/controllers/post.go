@@ -14,7 +14,7 @@ func Delete(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, gin.H{
-		"message": "Post deleted successfully",
+		"message": "Xoá bài viết thành công",
 		"post_id": id,
 	})
 }
