@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Trang Quản lý Bài viết</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Navbar -->
+    <div id="navbar">
+        <div class="nav-left" id="navLeft">
+            <div class="userbox" id="userBox">
+                <span class="avatar" id="avatarBtn"></span>
+                <span class="username" id="userName"></span>
+                <div class="user-popup" id="userPopup">
+                    <div class="popup-info">
+                        <div><b>Tên:</b> <span id="popupName"></span></div>
+                        <div><b>ID:</b> <span id="popupId"></span></div>
+                        <div><b>Email:</b> <span id="popupEmail"></span></div>
+                        <button id="logoutBtn">Đăng xuất</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="nav-right" id="navRight">
+            <a href="index.html" id="brandLogo" class="brand-logo">ThanhDatIdea</a>
+            <a href="login.html" id="loginBtn" class="nav-btn">Đăng nhập</a>
+            <a href="login.html" id="registerBtn" class="nav-btn">Đăng ký</a>
+        </div>
+    </div>
+
+    <div id="userBar"></div>
+
+    <div class="container">
+        <!-- Form đăng bài -->
+        <section class="form-section" id="formSection">
+            <h2>Nội dung Thảo Luận</h2>
+            <form id="postForm">
+                <textarea id="title" class="post-form-input" placeholder="Nội dung Thảo luận..." required
+                    maxlength="500"></textarea>
+                <div id="charCount">0/500</div>
+                <button type="submit" class="post-form-btn" id="submitBtn">Đăng</button>
+            </form>
+        </section>
+
+        <hr>
+
+        <section class="list-section">
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Tìm bài viết...">
+                <button id="searchBtn">Tìm kiếm</button>
+            </div>
+            <h2>Thảo luận</h2>
+            <ul id="postsList"></ul>
+        </section>
+    </div>
+
+    <script src="index.js"></script>
+</body>
+
+</html>

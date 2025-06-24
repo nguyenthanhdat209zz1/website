@@ -1,0 +1,48 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f6fb;
+    margin: 0;
+    padding: 0;
+}
+
+#adminNavbar {
+    background: #4070f4;
+    color: #fff;
+    padding: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#adminContent {
+    padding: 24px;
+}
+
+h1 {
+    color: #4070f4;
+}
+
+ul {
+    background: #fff;
+    padding: 16px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px #0001;
+}
+
+li {
+    margin-bottom: 8px;
+}
+
+button {
+    background: #4070f4;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 6px 12px;
+    cursor: pointer;
+}
+
+.admin-btn {
+    margin-left: 16px;
+    background: #222;
+}
