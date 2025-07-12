@@ -5,9 +5,14 @@
     <meta charset="UTF-8">
     <title>Trang Quản lý Bài viết</title>
     <link rel="stylesheet" href="style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 
 <body>
+    <button id="switch-to-admin" class="switch-btn"
+        style="display: none; position: fixed; top: 16px; left: 16px; z-index: 9999;">
+        Chuyển giao diện
+    </button>
     <!-- Navbar -->
     <div id="navbar">
         <div class="nav-left" id="navLeft">
@@ -39,17 +44,16 @@
             <h2>Nội dung Thảo Luận</h2>
             <form id="postForm">
                 <textarea id="title" class="post-form-input" placeholder="Nội dung Thảo luận..." required
-                    maxlength="500"></textarea>
-                <div id="charCount">0/500</div>
+                    maxlength="1500"></textarea>
+                <div id="charCount">0/1500</div>
                 <button type="submit" class="post-form-btn" id="submitBtn">Đăng</button>
             </form>
         </section>
-
         <hr>
-
         <section class="list-section">
             <div class="search-bar">
                 <input type="text" id="searchInput" placeholder="Tìm bài viết...">
+                <input type="text" id="authorInput" placeholder="Người đăng...">
                 <button id="searchBtn">Tìm kiếm</button>
             </div>
             <h2>Thảo luận</h2>

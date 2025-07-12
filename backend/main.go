@@ -16,12 +16,14 @@ func main() {
 	config.Rule_Role(config.DB)
 
 	r := gin.Default()
-	r.Use(controllers.CorsMiddleware())
+	r.Use(controllers.CORSMiddleware())
 	r.POST("/login", controllers.Login)
 	r.POST("/register", controllers.Register)
 
 	router.PostRouter(r)
 	router.CommentRouter(r)
+	router.StatRouter(r)
+	router.ReportRouter(r)
 	r.Run(":8081")
 }
 
@@ -31,5 +33,8 @@ func RunMigration(db *gorm.DB) {
 		&models.Role{},
 		&models.Rule{},
 		&models.Post{},
+		&models.Report{},
+		&models.PostView{},
+		&models.PostReaction{},
 	)
 }

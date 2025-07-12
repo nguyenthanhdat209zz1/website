@@ -115,7 +115,7 @@ func Login(c *gin.Context) {
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
 		"username": user.Name,
 		"role":     user.Role.Name,
-		"exp":      time.Now().Add(24 * time.Hour).Unix(),
+		"exp":      time.Now().Add(999999 * time.Hour).Unix(),
 	})
 
 	tokenString, err := token.SignedString(config.JwtKey)

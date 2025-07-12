@@ -10,7 +10,7 @@ import (
 	"github.com/golang-jwt/jwt/v5"
 )
 
-func CorsMiddleware() gin.HandlerFunc {
+func CORSMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
 		c.Writer.Header().Set("Access-Control-Allow-Credentials", "true")
@@ -21,6 +21,7 @@ func CorsMiddleware() gin.HandlerFunc {
 			c.AbortWithStatus(204)
 			return
 		}
+
 		c.Next()
 	}
 }

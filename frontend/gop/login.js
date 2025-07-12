@@ -33,7 +33,11 @@ const callAPI = async (url, data) => {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(data)
         });
-        return await response.json();
+        const result = await response.json();
+        if (result.role) {
+            localStorage.setItem('role', result.role);
+        }
+        return result;
     } catch (error) {
         console.error(error);
         throw new Error("Có lỗi xảy ra");
@@ -92,6 +96,7 @@ document.querySelector(".login .button input[value='Login Now']").addEventListen
         if (result.token) {
             localStorage.setItem("token", result.token);
             localStorage.setItem("user", JSON.stringify(result.user));
+            localStorage.setItem('role', result.role);
             showAlert("Đăng nhập thành công")
             window.location.href = "index.html";
         } else {
@@ -101,3 +106,5 @@ document.querySelector(".login .button input[value='Login Now']").addEventListen
         showAlert(error.message);
     }
 });
+
+localStorage.removeItem('role');
