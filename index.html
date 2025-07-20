@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Trang Quản lý Bài viết</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <link rel="stylesheet" crossorigin href="/website/assets/index-Y4Chir0m.css">
+</head>
+
+<body>
+    <button id="switch-to-admin" class="switch-btn"
+        style="display: none; position: fixed; top: 19px; left: 16px; z-index: 9999;">
+        Chuyển giao diện
+    </button>
+    <!-- Navbar -->
+    <div id="navbar">
+        <div class="nav-left" id="navLeft">
+            <a href="index.html" id="brandLogo" class="brand-logo">ThanhDatIdea</a>
+        </div>
+        <div class="nav-right" id="navRight">
+            <div class="dropdown-leaderboard">
+
+            </div>
+            <button id="switch-to-admin" class="nav-btn switch-admin-btn" style="display: none;">Chuyển giao
+                diện</button>
+            <div class="userbox" id="userBox">
+                <span class="avatar" id="avatarBtn"></span>
+                <span class="username" id="userName"></span>
+                <div class="user-popup" id="userPopup">
+                    <div class="popup-info">
+                        <div><b>Tên:</b> <span id="popupName"></span></div>
+                        <div><b>ID:</b> <span id="popupId"></span></div>
+                        <div><b>Email:</b> <span id="popupEmail"></span></div>
+                        <button id="logoutBtn">Đăng xuất</button>
+                    </div>
+                </div>
+                <button id="tab-home" class="nav-tab-btn active">Trang Chủ</button>
+                <button id="tab-qa" class="nav-tab-btn">Hỏi Đáp</button>
+                <button id="leaderboardDropdownBtn" class="triangle-btn">&#9776;</button>
+                <div id="leaderboardDropdownMenu" class="dropdown-menu" style="display:none;">
+                    <div data-type="score">Top điểm số</div>
+                    <div data-type="like">Top like</div>
+                    <div data-type="view">Top view</div>
+                    <div data-type="contribution">Top đóng góp</div>
+                </div>
+            </div>
+
+            <a href="login.html" id="loginBtn" class="nav-btn">Đăng nhập</a>
+            <a href="login.html" id="registerBtn" class="nav-btn">Đăng ký</a>
+        </div>
+    </div>
+    <div id="leaderboardDesc" class="leaderboard-desc" style="display:none"></div>
+    <section id="leaderboardSection-score" class="leaderboard-section" style="display:none"></section>
+    <section id="leaderboardSection-like" class="leaderboard-section" style="display:none"></section>
+    <section id="leaderboardSection-view" class="leaderboard-section" style="display:none"></section>
+    <section id="leaderboardSection-contribution" class="leaderboard-section" style="display:none"></section>
+
+    <div id="userBar"></div>
+
+    <div class="container">
+        <!-- Section Trang Chủ -->
+        <section class="home-section" id="homeSection">
+            <!-- Form đăng bài -->
+            <section class="form-section" id="formSection">
+                <h2>Nội dung Thảo Luận</h2>
+                <form id="postForm">
+                    <textarea id="title" class="post-form-input" placeholder="Nội dung Thảo luận..." required
+                        maxlength="1500"></textarea>
+                    <div id="charCount">0/1500</div>
+                    <button type="submit" class="post-form-btn" id="submitBtn">Đăng</button>
+                </form>
+            </section>
+            <hr>
+            <section class="list-section">
+                <div class="search-bar">
+                    <input type="text" id="searchInput" placeholder="Tìm bài viết...">
+                    <input type="text" id="authorInput" placeholder="Người đăng...">
+                    <button id="searchBtn">Tìm kiếm</button>
+                </div>
+                <h2>Thảo luận</h2>
+                <ul id="postsList"></ul>
+            </section>
+        </section>
+
+        <!-- Section Hỏi Đáp -->
+        <section class="qa-section" id="qaSection" style="display:none;">
+            <h2>Hỏi Đáp</h2>
+            <form id="askForm" style="margin-bottom:20px; display: flex; flex-direction: column; gap: 10px;">
+                <input type="text" id="askTitle" placeholder="Tiêu đề câu hỏi..." required maxlength="250"
+                    style="padding:10px; border:1px solid #ddd; border-radius:5px;">
+                <div id="askTitleCounter" style="font-size:0.75em;color:#888;text-align:right;">0/250</div>
+                <textarea id="askContent" placeholder="Nội dung câu hỏi..." required maxlength="2500"
+                    style="padding:10px; border:1px solid #ddd; border-radius:5px; min-height:80px;"></textarea>
+                <div id="askContentCounter" style="font-size:0.75em;color:#888;text-align:right;">0/2500</div>
+                <input type="text" id="askTag" placeholder="Thẻ chuyên môn (ví dụ: JavaScript, GoLang)..."
+                    maxlength="50" style="padding:10px; border:1px solid #ddd; border-radius:5px;">
+                <div id="askTagCounter" style="font-size:0.75em;color:#888;text-align:right;">0/50</div>
+                <button type="submit"
+                    style="padding:10px 20px; background-color:#4070f4; color:white; border:none; border-radius:5px; cursor:pointer;">Đăng
+                    Câu Hỏi</button>
+            </form>
+            <ul id="qaList"></ul>
+        </section>
+
+        <!-- Section Chi tiết Hỏi Đáp -->
+        <section class="qa-detail-section" id="qaDetailSection" style="display:none;">
+            <button id="backToQAList"
+                style="background:#f0f0f0; border:none; padding:8px 15px; border-radius:5px; cursor:pointer; margin-bottom:15px;">&larr;
+                Quay lại danh sách</button>
+            <h2 id="qaDetailTitle"></h2>
+            <div style="color:#888; font-size:0.95em; margin:5px 0 15px 0;">Tag: <span id="qaDetailTag"
+                    style="color:#4070f4; font-weight:600;"></span> | Hỏi bởi: <span id="qaDetailUser"></span></div>
+            <p id="qaDetailBody" style="margin-bottom:20px; line-height:1.6;"></p>
+            <h3>Trả lời</h3>
+            <ul id="answerList" style="margin-top:15px; padding-left:0;"></ul>
+            <form id="answerForm" style="margin-top:20px; display:flex; flex-direction:column; gap:10px;">
+                <textarea id="answerContent" placeholder="Viết câu trả lời của bạn..." required maxlength="500"
+                    style="padding:10px; border:1px solid #ddd; border-radius:5px; min-height:60px;"></textarea>
+                <div id="answerContentCounter" style="font-size:0.75em;color:#888;text-align:right;">0/500</div>
+                <input type="text" id="answerTag" placeholder="Thẻ chuyên môn (ví dụ: CSS, HTML)..." maxlength="50"
+                    style="padding:10px; border:1px solid #ddd; border-radius:5px;">
+                <div id="answerTagCounter" style="font-size:0.75em;color:#888;text-align:right;">0/50</div>
+                <button type="submit"
+                    style="padding:10px 20px; background-color:#28a745; color:white; border:none; border-radius:5px; cursor:pointer;">Gửi
+                    Trả Lời</button>
+            </form>
+        </section>
+    </div>
+
+    <script src="index.js"></script>
+</body>
+
+</html>
