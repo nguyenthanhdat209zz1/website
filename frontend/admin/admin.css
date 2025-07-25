@@ -1,0 +1,457 @@
+:root {
+    --bg: #f6f7fb;
+    --text: #222;
+    --card-bg: #fff;
+    --border: #eee;
+    --sidebar-bg: #fff;
+    --sidebar-text: #333;
+    --sidebar-active: #e0e7ff;
+    --popup-bg: #fff;
+    --menu-bg: #fff;
+    --menu-hover: #fbeaea;
+    --danger: #d00;
+}
+
+body.dark {
+    --bg: #181a20;
+    --text: #e6e6e6;
+    --card-bg: #23262f;
+    --border: #23262f;
+    --sidebar-bg: #23262f;
+    --sidebar-text: #e6e6e6;
+    --sidebar-active: #2d3344;
+    --popup-bg: #23262f;
+    --menu-bg: #23262f;
+    --menu-hover: #2d3344;
+    --danger: #ff6b6b;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    margin: 0;
+    padding: 0;
+    transition: background 0.3s, color 0.3s;
+}
+
+#adminNavbar {
+    background: var(--sidebar-bg);
+    color: var(--sidebar-text);
+    padding: 1px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 15px;
+    border-bottom: 1px solid var(--border);
+}
+
+#adminNavbar .brand {
+    font-weight: bold;
+    font-size: 22px;
+    letter-spacing: 1px;
+}
+
+.admin-container {
+    display: flex;
+    min-height: 100vh;
+    background: var(--bg);
+}
+
+.admin-sidebar {
+    width: 220px;
+    background: var(--sidebar-bg);
+    color: var(--sidebar-text);
+    border-right: 1px solid var(--border);
+    box-shadow: 2px 0 8px #0001;
+    padding-top: 32px;
+}
+
+.admin-sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.admin-sidebar .tab-btn {
+    display: block;
+    padding: 14px 32px;
+    cursor: pointer;
+    color: var(--sidebar-text);
+    background: none;
+    border: none;
+    width: 100%;
+    text-align: left;
+    font-size: 16px;
+    border-radius: 0 20px 20px 0;
+    transition: background 0.2s, color 0.2s;
+}
+
+.admin-sidebar .tab-btn.active,
+.admin-sidebar .tab-btn:hover {
+    background: var(--sidebar-active);
+    color: var(--text);
+}
+
+.admin-main {
+    flex: 1;
+    padding: 32px 40px;
+    background: var(--bg);
+    min-height: 100vh;
+}
+
+.tab-content {
+    display: none;
+    animation: fadeIn 0.2s;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+h2 {
+    color: #4070f4;
+    margin-bottom: 18px;
+}
+
+/* List chung */
+#userList,
+#postList,
+#commentList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#userList li,
+#postList li,
+#commentList li {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin-bottom: 12px;
+    padding: 12px 16px 8px 16px;
+    position: relative;
+    transition: box-shadow 0.2s, background 0.2s;
+    box-shadow: 0 1px 2px #0001;
+    color: var(--text);
+}
+
+#userList li:hover,
+#postList li:hover,
+#commentList li:hover {
+    box-shadow: 0 2px 8px #0002;
+    background: var(--sidebar-active);
+}
+
+.role-label {
+    background: var(--sidebar-active);
+    color: var(--sidebar-text);
+    border-radius: 4px;
+    padding: 2px 8px;
+    font-size: 13px;
+    margin-left: 6px;
+}
+
+.user-actions,
+.post-actions,
+.comment-actions {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+}
+
+.user-menu-dot,
+.post-menu-dot,
+.comment-menu-dot {
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    color: #888;
+}
+
+.user-menu-dropdown,
+.post-menu-dropdown,
+.comment-menu-dropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 24px;
+    background: var(--menu-bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    box-shadow: 0 2px 8px #0002;
+    z-index: 10;
+    min-width: 120px;
+}
+
+.user-menu-dropdown button,
+.post-menu-dropdown button,
+.comment-menu-dropdown button {
+    display: block;
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 8px 16px;
+    text-align: left;
+    color: var(--danger);
+    cursor: pointer;
+    font-size: 15px;
+    border-radius: 0;
+    transition: background 0.2s;
+}
+
+.user-menu-dropdown button:hover,
+.post-menu-dropdown button:hover,
+.comment-menu-dropdown button:hover {
+    background: var(--menu-hover);
+}
+
+/* Popup sửa user, post */
+.edit-user-popup,
+.edit-post-popup-bg .edit-post-popup {
+    background: var(--popup-bg);
+    color: var(--text);
+    border-radius: 12px;
+    box-shadow: 0 4px 24px #0003;
+    padding: 32px 28px;
+    min-width: 320px;
+    max-width: 90vw;
+}
+
+.edit-user-popup input,
+.edit-post-popup input {
+    background: var(--card-bg);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 8px;
+    width: 100%;
+    margin-bottom: 12px;
+}
+
+.edit-user-popup button,
+.edit-post-popup button {
+    background: var(--sidebar-active);
+    color: var(--text);
+    border: none;
+    border-radius: 6px;
+    padding: 7px 18px;
+    cursor: pointer;
+    font-size: 15px;
+    margin-right: 8px;
+    transition: background 0.2s;
+}
+
+.edit-user-popup button:hover,
+.edit-post-popup button:hover {
+    background: var(--sidebar-bg);
+}
+
+/* Bình luận */
+.comment-meta {
+    color: #888;
+    font-size: 13px;
+    margin-left: 8px;
+}
+
+/* Thống kê */
+.stat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 16px;
+}
+
+.stat-grid div {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 18px 20px;
+    font-size: 17px;
+    box-shadow: 0 1px 2px #0001;
+    color: var(--text);
+}
+
+#logoutBtn {
+    background: var(--danger);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 7px 18px;
+    cursor: pointer;
+    font-size: 15px;
+    transition: background 0.2s;
+}
+
+#logoutBtn:hover {
+    background: #a00;
+}
+
+/* Theme toggle button */
+#toggleThemeBtn {
+    background: var(--sidebar-active);
+    color: var(--text);
+    border: none;
+    border-radius: 6px;
+    padding: 8px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 16px;
+    transition: background 0.2s;
+}
+
+#toggleThemeBtn:hover {
+    background: var(--sidebar-bg);
+}
+
+.switch-btn {
+    background: linear-gradient(90deg, #4f8cff 0%, #2355d6 100%);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 6px 18px;
+    font-size: 15px;
+    font-weight: 500;
+    margin-left: 18px;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(79, 140, 255, 0.08);
+    transition: background 0.2s, transform 0.1s;
+}
+
+.switch-btn:hover {
+    background: linear-gradient(90deg, #2355d6 0%, #4f8cff 100%);
+    transform: translateY(-2px) scale(1.04);
+    box-shadow: 0 4px 16px rgba(79, 140, 255, 0.15);
+}
+
+#switch-to-admin {
+    margin-left: 1535px;
+    margin-top: -3px;
+}
+
+/* Overlay cho popup sửa user */
+.edit-user-popup-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.edit-user-popup {
+    position: relative;
+    z-index: 2100;
+    margin: 0;
+    top: auto;
+    left: auto;
+    transform: none;
+}
+
+/* --- Đẹp hơn cho bài viết chờ duyệt --- */
+#pendingPostList li {
+    background: #fffbe6;
+    border: 1px solid #ffc04d;
+    border-radius: 14px;
+    box-shadow: 0 2px 12px #ffc04d22;
+    position: relative;
+    padding: 5px 24px 5px 32px;
+    /* thu nhỏ padding trái lại */
+    margin-bottom: 18px;
+    min-height: 56px;
+    display: flex;
+    align-items: center;
+    transition: box-shadow 0.2s, border 0.2s;
+}
+
+#pendingPostList li:hover {
+    box-shadow: 0 4px 24px #ffc04d44;
+    border-color: #ff9800;
+}
+
+#pendingPostList li b {
+    font-size: 18px;
+    color: #d48806;
+    margin-right: 8px;
+}
+
+#pendingPostList li .author {
+    font-size: 14px;
+    color: #888;
+    margin-left: 6px;
+    font-weight: 400;
+}
+
+#pendingPostList li .pending-label {
+    position: absolute;
+    top: -30px;
+    right: 1px;
+    font-size: 13px;
+    color: #ff9800;
+    font-weight: 6000;
+    background: #fff3e0;
+    border-radius: 12px;
+    padding: 2px 14px;
+    border: 1px solid #ffd591;
+    letter-spacing: 0.5px;
+    box-shadow: 0 1px 4px #ffc04d22;
+    z-index: 2;
+}
+
+#pendingPostList li .pending-actions {
+    margin-left: auto;
+    display: flex;
+    gap: 10px;
+}
+
+#pendingPostList li .approve-post-btn,
+#pendingPostList li .reject-post-btn {
+    border: none;
+    border-radius: 8px;
+    padding: 7px 18px;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+    box-shadow: 0 1px 4px #0001;
+}
+
+#pendingPostList li .approve-post-btn {
+    background: #e6ffed;
+    color: #389e0d;
+    border: 1px solid #b7eb8f;
+}
+
+#pendingPostList li .approve-post-btn:hover {
+    background: #b7eb8f;
+    color: #237804;
+}
+
+#pendingPostList li .reject-post-btn {
+    background: #fff1f0;
+    color: #cf1322;
+    border: 1px solid #ffa39e;
+}
+
+#pendingPostList li .reject-post-btn:hover {
+    background: #ffa39e;
+    color: #a8071a;
+}

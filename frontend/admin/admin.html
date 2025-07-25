@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Trang Quản Trị</title>
+    <link rel="stylesheet" href="admin.css">
+</head>
+
+<body>
+    <div id="adminNavbar">
+        <h1 style="display: flex; align-items: center;">
+            Admin Panel
+            <button id="switch-to-user" class="switch-btn">Chuyển giao diện</button>
+        </h1>
+        <span>Quản trị viên: <span id="adminName"></span></span>
+        <button id="logoutBtn">Đăng xuất</button>
+    </div>
+    <div class="admin-container">
+        <nav class="admin-sidebar">
+            <ul>
+                <li class="tab-btn active" data-tab="userTab">Quản lý User</li>
+                <li class="tab-btn" data-tab="postTab">Quản lý Bài viết</li>
+                <li class="tab-btn" data-tab="commentTab">Quản lý Bình luận</li>
+                <li class="tab-btn" data-tab="reportTab">Quản lý Báo cáo</li>
+                <li class="tab-btn" data-tab="statsTab">Thống kê</li>
+                <li class="tab-btn" data-tab="pendingPostTab">Bài viết chờ duyệt</li>
+                <li class="tab-btn" data-tab="themeTab">Cài đặt giao diện</li>
+            </ul>
+        </nav>
+        <main class="admin-main">
+            <section id="userTab" class="tab-content active">
+                <h2>Quản lý người dùng</h2>
+                <ul id="userList"></ul>
+            </section>
+            <section id="postTab" class="tab-content">
+                <h2>Quản lý bài viết</h2>
+                <ul id="postList"></ul>
+            </section>
+            <section id="commentTab" class="tab-content">
+                <h2>Quản lý bình luận</h2>
+                <ul id="commentList"></ul>
+            </section>
+            <section id="statsTab" class="tab-content">
+                <h2>Thống kê</h2>
+                <div id="statsContent">Đang tải...</div>
+            </section>
+            <section id="themeTab" class="tab-content">
+                <h2>Cài đặt giao diện</h2>
+                <button id="toggleThemeBtn">Chuyển theme Sáng/Tối</button>
+            </section>
+            <section id="pendingPostTab" class="tab-content">
+                <h2>Bài viết chờ duyệt</h2>
+                <ul id="pendingPostList"></ul>
+            </section>
+            <section id="reportTab" class="tab-content">
+                <h2>Quản lý báo cáo</h2>
+                <ul id="reportList"></ul>
+            </section>
+        </main>
+    </div>
+    <script src="admin.js"></script>
+</body>
+
+</html>
