@@ -20,6 +20,12 @@ func main() {
 	r.POST("/login", controllers.Login)
 	r.POST("/register", controllers.Register)
 
+	r.GET("/", func(c *gin.Context) {
+		c.JSON(200, gin.H{
+			"message": "API is running ",
+		})
+	})
+
 	router.PostRouter(r)
 	router.CommentRouter(r)
 	router.StatRouter(r)
