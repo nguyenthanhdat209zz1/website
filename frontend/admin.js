@@ -330,7 +330,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 const typeLabel = r.type === 'post' ? 'Bài viết' : 'Bình luận';
                 let viewBtn = '';
                 if (r.type === 'post') {
-                    viewBtn = `<a href="../index.html#post-${r.target_id}" target="_blank" style="margin-left:12px;color:#4070f4;font-weight:500;text-decoration:underline;">Xem bài viết</a>`;
+                    viewBtn = `<a href="../gop/index.html#post-${r.target_id}" target="_blank" style="margin-left:12px;color:#4070f4;font-weight:500;text-decoration:underline;">Xem bài viết</a>`;
                 }
                 return `
                     <li style="margin-bottom:16px; background:#fff; border-radius:8px; box-shadow:0 1px 4px #0001; padding:16px 18px;">
@@ -411,7 +411,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     // ĐỔI GIAO DIỆN NGƯỜI DÙNG
     document.getElementById('switch-to-user').onclick = function () {
         localStorage.setItem('currentView', 'user');
-        window.location.href = '../index.html';
+        window.location.href = '../gop/index.html';
     };
 
     // Gọi loadUsers khi vào tab user
