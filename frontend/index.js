@@ -546,7 +546,7 @@ document.addEventListener('DOMContentLoaded', () => {
         btn.style.display = 'inline-block';
         btn.onclick = function () {
             localStorage.setItem('currentView', 'admin');
-            window.location.href = '../admin/admin.html';
+            window.location.href = "/admin.html";
         };
     } else if (btn) {
         btn.style.display = 'none';
