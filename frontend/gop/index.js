@@ -88,7 +88,8 @@ document.addEventListener('DOMContentLoaded', () => {
         // Không cần lấy tags nữa, chỉ gửi nội dung
         const token = localStorage.getItem('token');
         const editId = $('#postForm').getAttribute('data-edit-id');
-        const url = editId ? `http://localhost:8081/posts/${editId}` : 'http://localhost:8081/posts';
+        const API_URL = 'https://website-datz.onrender.com';
+        const url = editId ? `${API_URL}/posts/${editId}` : `${API_URL}/posts`;
         const method = editId ? 'PUT' : 'POST';
 
         const res = await fetch(url, {
@@ -112,7 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // TẢI DANH SÁCH BÀI VIẾT TỪ BACKEND
     async function loadPosts(posts) {
         if (!posts) {
-            const res = await fetch('http://localhost:8081/posts');
+            const res = await fetch('https://website-datz.onrender.com/posts');
             posts = await res.json();
         }
         renderPosts(posts);
@@ -294,7 +295,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 deleteBtn.onclick = async function () {
                     if (!confirm('Bạn có chắc muốn xoá bài viết này?')) return;
                     const token = localStorage.getItem('token');
-                    const res = await fetch(`http://localhost:8081/posts/${postId}`, {
+                    const res = await fetch(`https://website-datz.onrender.com/posts/${postId}`, {
                         method: 'DELETE',
                         headers: { 'Authorization': 'Bearer ' + token }
                     });
@@ -314,7 +315,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 reportBtn.onclick = async function () {
                     menuDropdown.style.display = 'none';
                     const token = localStorage.getItem('token');
-                    const res = await fetch(`http://localhost:8081/posts/${postId}/report`, {
+                    const res = await fetch(`https://website-datz.onrender.com/posts/${postId}/report`, {
                         method: 'POST',
                         headers: { 'Authorization': 'Bearer ' + token },
                     });
@@ -337,7 +338,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // HIỂN THỊ SỐ LƯỢNG BÌNH LUẬN
     async function fetchCommentCount(postId) {
-        const res = await fetch(`http://localhost:8081/comments/${postId}`);
+        const res = await fetch(`https://website-datz.onrender.com/comments/${postId}`);
         const comments = await res.json();
         $(`[data-id="${postId}"] .comment-count`).innerText = Array.isArray(comments) ? comments.length : 0;
     }
@@ -355,7 +356,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Gọi API tăng view nếu user đã đăng nhập
                 const token = localStorage.getItem('token');
                 if (token) {
-                    fetch(`http://localhost:8081/posts/${postId}/view`, {
+                    fetch(`https://website-datz.onrender.com/posts/${postId}/view`, {
                         method: 'POST',
                         headers: { 'Authorization': 'Bearer ' + token }
                     });
@@ -371,7 +372,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // HIỂN THỊ DANH SÁCH BÌNH LUẬN
     async function loadComments(postId) {
-        const res = await fetch(`http://localhost:8081/comments/${postId}`);
+        const res = await fetch(`https://website-datz.onrender.com/comments/${postId}`);
         const comments = await res.json();
         const block = $(`[data-id="${postId}"] .comments-block`);
 
@@ -405,7 +406,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const token = localStorage.getItem('token');
             const postIdNum = Number(postId);
             if (!postIdNum) return alert('Không xác định được bài viết!');
-            const res = await fetch('http://localhost:8081/comments', {
+            const res = await fetch('https://website-datz.onrender.com/comments', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
                 body: JSON.stringify({ content: content.trim(), post_id: postIdNum })
@@ -424,7 +425,7 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('handleReaction', postId, type, li);
         const token = localStorage.getItem('token');
         if (!token) return alert('Bạn cần đăng nhập để thực hiện hành động này!');
-        const res = await fetch(`http://localhost:8081/posts/${postId}/reaction`, {
+        const res = await fetch(`https://website-datz.onrender.com/posts/${postId}/reaction`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
             body: JSON.stringify({ reaction: type })
@@ -478,7 +479,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 form.onsubmit = async ev => {
                     ev.preventDefault();
                     const newTitle = form.querySelector('textarea[name="title"]').value;
-                    const res = await fetch(`http://localhost:8081/posts/${id}`, {
+                    const res = await fetch(`https://website-datz.onrender.com/posts/${id}`, {
                         method: 'PUT',
                         headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + (localStorage.getItem('token') || '') },
                         body: JSON.stringify({ title: newTitle })
@@ -528,7 +529,7 @@ document.addEventListener('DOMContentLoaded', () => {
         btn.style = 'padding: 6px 12px; background: #4070f4; color: #fff; border: none; border-radius: 6px; cursor: pointer; font-size: 14px; margin-top: 10px;';
         btn.onclick = function () {
             // Lọc bài viết chỉ của user này
-            fetch('http://localhost:8081/posts').then(r => r.json()).then(posts => {
+            fetch('https://website-datz.onrender.com/posts').then(r => r.json()).then(posts => {
                 posts = posts.filter(p => (p.user?.id || p.user?.ID) === (user.id ?? user.ID));
                 loadPosts(posts);
                 popup.remove();
@@ -573,7 +574,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const qaList = document.getElementById('qaList');
             qaList.innerHTML = '<li>Đang tải câu hỏi...</li>';
             try {
-                const res = await fetch('http://localhost:8081/questions');
+                const res = await fetch('https://website-datz.onrender.com/questions');
                 const data = await res.json();
                 qaList.innerHTML = '';
                 if (!Array.isArray(data) || data.length === 0) {
@@ -660,7 +661,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 if (content.length > 500) return alert('Nội dung không được vượt quá 500 ký tự!');
                                 if (tag.length > 50) return alert('Thẻ không được vượt quá 50 ký tự!');
                                 const token = localStorage.getItem('token');
-                                const res = await fetch(`http://localhost:8081/questions/${q.ID || q.id}`, {
+                                const res = await fetch(`https://website-datz.onrender.com/questions/${q.ID || q.id}`, {
                                     method: 'PUT',
                                     headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
                                     body: JSON.stringify({ title, content, tag })
@@ -684,7 +685,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         deleteBtn.onclick = async function () {
                             if (!confirm('Bạn có chắc muốn xoá câu hỏi này?')) return;
                             const token = localStorage.getItem('token');
-                            const res = await fetch(`http://localhost:8081/questions/${q.ID || q.id}`, {
+                            const res = await fetch(`https://website-datz.onrender.com/questions/${q.ID || q.id}`, {
                                 method: 'DELETE',
                                 headers: { 'Authorization': 'Bearer ' + token }
                             });
@@ -703,7 +704,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         reportBtn.onclick = async function () {
                             menuDropdown.style.display = 'none';
                             const token = localStorage.getItem('token');
-                            const res = await fetch(`http://localhost:8081/questions/${q.ID || q.id}/report`, {
+                            const res = await fetch(`https://website-datz.onrender.com/questions/${q.ID || q.id}/report`, {
                                 method: 'POST',
                                 headers: { 'Authorization': 'Bearer ' + token },
                             });
@@ -763,7 +764,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         if (!title || !content) return alert('Vui lòng nhập đủ tiêu đề và nội dung!');
                         const token = localStorage.getItem('token');
                         try {
-                            const res = await fetch('http://localhost:8081/questions', {
+                            const res = await fetch('https://website-datz.onrender.com/questions', {
                                 method: 'POST',
                                 headers: {
                                     'Content-Type': 'application/json',
@@ -798,7 +799,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     const token = localStorage.getItem('token');
                     if (!token) return alert('Bạn cần đăng nhập để trả lời!');
                     try {
-                        const res = await fetch('http://localhost:8081/answers', {
+                        const res = await fetch('https://website-datz.onrender.com/answers', {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json',
@@ -858,7 +859,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!title || !content) return alert('Vui lòng nhập đủ tiêu đề và nội dung!');
             const token = localStorage.getItem('token');
             try {
-                const res = await fetch('http://localhost:8081/questions', {
+                const res = await fetch('https://website-datz.onrender.com/questions', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -964,7 +965,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <thead><tr><th>Hạng</th><th>Tên</th><th>Điểm</th><th>Bài viết</th><th>Trả lời</th><th>Like</th><th>View</th><th>Huy hiệu</th></tr></thead>
         <tbody><tr><td colspan="8">Đang tải...</td></tr></tbody></table>`;
         try {
-            const res = await fetch(`http://localhost:8081/leaderboard?sort=${type}`);
+            const res = await fetch(`https://website-datz.onrender.com/leaderboard?sort=${type}`);
             const data = await res.json();
             let rows = '';
             data.forEach((u, idx) => {
@@ -1023,7 +1024,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const author = authorInput.value.trim().toLowerCase();
 
             // Lấy toàn bộ bài viết từ backend
-            const res = await fetch('http://localhost:8081/posts');
+            const res = await fetch('https://website-datz.onrender.com/posts');
             let posts = await res.json();
 
             // Lọc theo từ khóa và tác giả
@@ -1053,7 +1054,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 async function renderQuestionDetail(questionId) {
     try {
-        const res = await fetch(`http://localhost:8081/questions/${questionId}`);
+        const res = await fetch(`https://website-datz.onrender.com/questions/${questionId}`);
         const detail = await res.json();
         const qaDetailSection = document.getElementById('qaDetailSection');
         qaDetailSection.setAttribute('data-question-id', questionId);

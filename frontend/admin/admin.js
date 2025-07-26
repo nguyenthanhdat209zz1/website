@@ -42,7 +42,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     // LOAD DANH SÁCH NGƯỜI DÙNG
     async function loadUsers() {
         try {
-            const userRes = await fetch('http://localhost:8081/users', {
+            const API_URL = 'https://website-datz.onrender.com';
+            const userRes = await fetch(`${API_URL}/users`, {
                 headers: { 'Authorization': 'Bearer ' + (localStorage.getItem('token') || '') }
             });
             const users = await userRes.json();
@@ -93,7 +94,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                     const btn = e.target;
                     const id = btn.getAttribute('data-id');
                     if (!confirm('Bạn có chắc muốn xóa user này?')) return;
-                    fetch(`http://localhost:8081/users/${id}`, {
+                    fetch(`https://website-datz.onrender.com/users/${id}`, {
                         method: 'DELETE',
                         headers: { 'Authorization': 'Bearer ' + (localStorage.getItem('token') || '') }
                     }).then(res => {
@@ -166,7 +167,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             ev.preventDefault();
             const name = this.name.value.trim();
             const email = this.email.value.trim();
-            const res = await fetch(`http://localhost:8081/users/${id}`, {
+            const res = await fetch(`https://website-datz.onrender.com/users/${id}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + (localStorage.getItem('token') || '') },
                 body: JSON.stringify({ name, email })
@@ -184,7 +185,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     // LOAD DANH SÁCH BÀI VIẾT
     async function loadPosts() {
         try {
-            const postRes = await fetch('http://localhost:8081/posts', {
+            const API_URL = 'https://website-datz.onrender.com';
+            const postRes = await fetch(`${API_URL}/posts`, {
                 headers: { 'Authorization': 'Bearer ' + (localStorage.getItem('token') || '') }
             });
             const posts = await postRes.json();
@@ -233,7 +235,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                     e.stopPropagation();
                     const id = btn.getAttribute('data-id');
                     if (!confirm('Bạn có chắc muốn xóa bài viết này?')) return;
-                    const res = await fetch(`http://localhost:8081/posts/${id}`, {
+                    const res = await fetch(`https://website-datz.onrender.com/posts/${id}`, {
                         method: 'DELETE',
                         headers: { 'Authorization': 'Bearer ' + (localStorage.getItem('token') || '') }
                     });
@@ -253,7 +255,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     // LOAD DANH SÁCH BÌNH LUẬN
     async function loadComments() {
         try {
-            const commentRes = await fetch('http://localhost:8081/comments', {
+            const API_URL = 'https://website-datz.onrender.com';
+            const commentRes = await fetch(`${API_URL}/comments`, {
                 headers: { 'Authorization': 'Bearer ' + (localStorage.getItem('token') || '') }
             });
             const comments = await commentRes.json();
@@ -296,7 +299,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                     e.stopPropagation();
                     const id = btn.getAttribute('data-id');
                     if (!confirm('Bạn có chắc muốn xóa bình luận này?')) return;
-                    const res = await fetch(`http://localhost:8081/comments/${id}`, {
+                    const res = await fetch(`https://website-datz.onrender.com/comments/${id}`, {
                         method: 'DELETE',
                         headers: { 'Authorization': 'Bearer ' + (localStorage.getItem('token') || '') }
                     });
@@ -316,7 +319,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     // LOAD DANH SÁCH BÁO CÁO
     async function loadReports() {
         try {
-            const res = await fetch('http://localhost:8081/reports', {
+            const API_URL = 'https://website-datz.onrender.com';
+            const res = await fetch(`${API_URL}/reports`, {
                 headers: { 'Authorization': 'Bearer ' + (localStorage.getItem('token') || '') }
             });
             const reports = await res.json();
@@ -346,7 +350,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     // LOAD DANH SÁCH BÀI CHỜ DUYỆT
     async function loadPendingPosts() {
         try {
-            const res = await fetch('http://localhost:8081/posts/pending', {
+            const API_URL = 'https://website-datz.onrender.com';
+            const res = await fetch(`${API_URL}/posts/pending`, {
                 headers: { 'Authorization': 'Bearer ' + (localStorage.getItem('token') || '') }
             });
             const posts = await res.json();
@@ -369,7 +374,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             document.querySelectorAll('.approve-post-btn').forEach(btn => {
                 btn.onclick = async function () {
                     const id = btn.getAttribute('data-id');
-                    const res = await fetch(`http://localhost:8081/posts/${id}/approve`, {
+                    const res = await fetch(`${API_URL}/posts/${id}/approve`, {
                         method: 'POST',
                         headers: { 'Authorization': 'Bearer ' + (localStorage.getItem('token') || '') }
                     });
@@ -386,7 +391,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 btn.onclick = async function () {
                     const id = btn.getAttribute('data-id');
                     if (!confirm('Bạn có chắc muốn từ chối (xóa) bài viết này?')) return;
-                    const res = await fetch(`http://localhost:8081/posts/${id}/reject`, {
+                    const res = await fetch(`${API_URL}/posts/${id}/reject`, {
                         method: 'POST',
                         headers: { 'Authorization': 'Bearer ' + (localStorage.getItem('token') || '') }
                     });
@@ -482,7 +487,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         document.getElementById('editPostForm').onsubmit = async function (ev) {
             ev.preventDefault();
             const title = this.title.value.trim();
-            const res = await fetch(`http://localhost:8081/posts/${id}`, {
+            const res = await fetch(`https://website-datz.onrender.com/posts/${id}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + (localStorage.getItem('token') || '') },
                 body: JSON.stringify({ title })
@@ -499,7 +504,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     async function loadStats() {
         try {
-            const res = await fetch('http://localhost:8081/stats', {
+            const API_URL = 'https://website-datz.onrender.com';
+            const res = await fetch(`${API_URL}/stats`, {
                 headers: { 'Authorization': 'Bearer ' + (localStorage.getItem('token') || '') }
             });
             const stats = await res.json();

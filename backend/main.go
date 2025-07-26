@@ -16,13 +16,14 @@ func main() {
 	config.Rule_Role(config.DB)
 
 	r := gin.Default()
+
 	r.Use(controllers.CORSMiddleware())
 	r.POST("/login", controllers.Login)
 	r.POST("/register", controllers.Register)
 
 	r.GET("/", func(c *gin.Context) {
 		c.JSON(200, gin.H{
-			"message": "API is running ",
+			"message": "API is running s",
 		})
 	})
 

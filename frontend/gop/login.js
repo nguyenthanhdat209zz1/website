@@ -1,3 +1,5 @@
+const API_URL = 'https://website-datz.onrender.com';
+
 // Chuyển đổi giữa login/register
 document.getElementById('showRegister').onclick = function (e) {
     e.preventDefault();
@@ -16,7 +18,7 @@ document.getElementById('loginForm').onsubmit = async function (e) {
     const email = document.getElementById('loginEmail').value.trim();
     const password = document.getElementById('loginPassword').value;
     try {
-        const res = await fetch('http://localhost:8081/login', {
+        const res = await fetch(`${API_URL}/login`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email, password })
@@ -46,7 +48,7 @@ document.getElementById('registerForm').onsubmit = async function (e) {
         return;
     }
     try {
-        const res = await fetch('http://localhost:8081/register', {
+        const res = await fetch(`${API_URL}/register`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ name, email, password, role: "user" })
