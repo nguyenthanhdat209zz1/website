@@ -23,13 +23,20 @@ document.getElementById('loginForm').onsubmit = async function (e) {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email, password })
         });
-        const data = await res.json();
+        let data = {};
+        try {
+            data = await res.json();
+        } catch (err) {
+            // Nếu không parse được JSON, giữ data rỗng
+        }
         if (res.ok && data.token) {
             localStorage.setItem('token', data.token);
             localStorage.setItem('user', JSON.stringify(data.user));
             window.location.href = "index.html";
+        } else if (data.error) {
+            alert(data.error); // Hiển thị lỗi chi tiết từ backend
         } else {
-            alert(data.error || "Đăng nhập thất bại!");
+            alert("Đăng nhập thất bại!"); // Lỗi chung nếu không có message
         }
     } catch (err) {
         alert("Không kết nối được server!");
