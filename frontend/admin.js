@@ -411,7 +411,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     // ĐỔI GIAO DIỆN NGƯỜI DÙNG
     document.getElementById('switch-to-user').onclick = function () {
         localStorage.setItem('currentView', 'user');
-        window.location.href = '../gop/index.html';
+        window.location.href = '../index.html';
     };
 
     // Gọi loadUsers khi vào tab user
